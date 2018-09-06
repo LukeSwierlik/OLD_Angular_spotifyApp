@@ -1,0 +1,8 @@
+<!-- card-deck card-deck-justify -->
+<div class="card-deck card-deck-justify">
+    <album-card [album]="album" 
+        class="card" 
+        [routerLink] = "['album', album.id]"
+        *ngFor="let album of albums | async "></album-card>
+</div>
+<!-- /card-deck card-deck-justify -->

@@ -1,0 +1,9 @@
+.card-deck-justify{
+    justify-content: space-between;
+}
+album-card.card:nth-child(3n+1) {
+    margin-left: 0 !important;
+}
+album-card.card:nth-child(3n+3) {
+    margin-right: 0 !important;
+}
