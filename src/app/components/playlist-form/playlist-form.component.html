@@ -1,0 +1,45 @@
+<div class="card">
+    <!-- card-body -->
+    <div class="card-body">
+        <div class="form-group">
+            <label for="name">Nazwa:</label>
+            <input id="name"
+                   type="text"
+                   [(ngModel)]="playlist.name"
+                   class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="tracks">Tracks:</label>
+            <input id="tracks"
+                   type="text"
+                   [value]="playlist.tracks + ' utworów'"
+                   disabled
+                   class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="color">Color:</label>
+            <input id="color"
+                   type="color"
+                   [(ngModel)]="playlist.color" />
+        </div>
+
+        <div class="form-group">
+            <label for="favourite">
+                <input id="favourite"
+                       type="checkbox"
+                       [(ngModel)]="playlist.favourite" />Ulubiona
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button
+                class="btn btn-success float-right"
+                (click)="save(playlist)">Zapisz
+            </button>
+        </div>
+    </div>
+    <!-- /card-body -->
+</div>
