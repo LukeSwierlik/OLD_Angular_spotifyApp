@@ -3,8 +3,8 @@
     <div class="col">
         <app-playlists-list
             [playlists]="playlists"
-            [selected]="selected"
-            (select)="select($event)"
+            [selected]="selectedPlaylist"
+            (selectPlaylist)="select($event)"
         >
         </app-playlists-list>
 
@@ -30,33 +30,33 @@
             </app-content-card>
 
             <app-content-card
-                title="Playlista {{ selected.name }}"
+                title="Playlista {{ selectedPlaylist.name }}"
                 *ngSwitchCase="'selected'"
             >
                 <app-playlist-detail
-                    [playlist]="selected"
+                    [playlist]="selectedPlaylist"
                     (editPlaylist)="edit($event)"
                 >
                 </app-playlist-detail>
             </app-content-card>
 
             <app-content-card
-                title="Playlista {{ selected.name }} - utwórz nowy"
+                title="Playlista {{ selectedPlaylist.name }} - utwórz nowy"
                 *ngSwitchCase="'new'"
             >
                 <app-playlist-form
-                    [playlist]="edited"
+                    [playlist]="editedPlaylist"
                     (saved)="save($event)"
                 >
                 </app-playlist-form>
             </app-content-card>
 
             <app-content-card
-                title="Playlista {{ selected.name }} - edycja"
+                title="Playlista {{ selectedPlaylist.name }} - edycja"
                 *ngSwitchCase="'edit'"
             >
                 <app-playlist-form
-                    [playlist]="edited"
+                    [playlist]="editedPlaylist"
                     (saved)="save($event)"
                 >
                 </app-playlist-form>

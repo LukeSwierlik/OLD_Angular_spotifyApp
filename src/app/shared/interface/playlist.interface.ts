@@ -4,4 +4,4 @@ export default interface IPlaylist {
     tracks: number;
     color: string;
     favourite: boolean;
-};
+}

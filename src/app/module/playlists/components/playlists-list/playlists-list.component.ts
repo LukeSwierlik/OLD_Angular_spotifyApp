@@ -13,7 +13,7 @@ export class PlaylistsListComponent implements OnInit {
     @Input()
     selected;
 
-    @Output('select')
+    @Output('selectPlaylist')
     onSelected = new EventEmitter();
 
     constructor() {

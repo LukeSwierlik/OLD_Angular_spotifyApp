@@ -17,11 +17,9 @@ export class PlaylistFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('playlist1', this.playlist);
     }
 
     save(playlist) {
-        console.log('savveee', playlist);
         this.onSave.emit(playlist);
     }
 }
