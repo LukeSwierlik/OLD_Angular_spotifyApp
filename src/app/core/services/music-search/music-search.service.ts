@@ -1,33 +1,42 @@
 import {Injectable} from '@angular/core';
 import IAlbum from '../../../shared/interface/album.interface';
-import {Http, Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
+import {startWith, map} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MusicSearchService {
-    albums: Array<IAlbum> = [];
+    private albums: Array<IAlbum> = [];
+    private albumsStream$ = new Subject();
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
+        this.search('batman');
     }
 
-    search(query, callback) {
+    public search(query: String) {
         const url = `https://api.spotify.com/v1/search?type=album&market=PL&query=${query}`;
 
         this.http.get(url)
-            .subscribe((response: Response) => {
-               const data = response.json();
-               const albums = data.albums.items;
-
-               this.albums = albums;
-
-               callback(albums);
+            .pipe(map((response: any) => {
+                return response.albums.items;
+            }))
+            .subscribe(albums => {
+                this.albums = albums;
+                this.albumsStream$.next(this.albums);
             });
     }
 
-    getAlbums(callback) {
-        const query = 'batman';
+    public getAlbumsStream(): Observable<Array<IAlbum>> {
+        return this.albumsStream$
+            .pipe(startWith(this.albums));
+    }
 
-        this.search(query, callback);
+    public getAlbum(id: String): Observable<Array<IAlbum>> {
+        const url = `https://api.spotify.com/v1/albums/${id}`;
+
+        return this.http.get(url)
+            .pipe(map((response: any) => response));
     }
 }

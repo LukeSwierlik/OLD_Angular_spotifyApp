@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import IPlaylist from '../../../../shared/interface/playlist.interface';
 
 @Component({
     selector: 'app-playlist-detail',
@@ -7,10 +8,10 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 export class PlaylistDetailComponent implements OnInit {
 
     @Input()
-    playlist;
+    private playlist: IPlaylist;
 
     @Output('editPlaylist')
-    editEmitter = new EventEmitter();
+    private editEmitter = new EventEmitter();
 
     constructor() {
     }

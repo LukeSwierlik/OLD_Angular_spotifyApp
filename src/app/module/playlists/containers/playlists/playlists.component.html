@@ -1,67 +1,45 @@
 <div class="row mt-1">
-    <!-- col -->
+    <div class="col">
+        <h4 class="display-3 float-xs-right mb-2">Twoje Playlisty</h4>
+    </div>
+</div>
+
+<div class="row mt-1">
+    <!--<div class="col">
+      <div [ngSwitch]="mode">
+        <content-card title="Playlista" *ngSwitchDefault>
+          <p>Wybierz <b>playlistę</b>!</p>
+        </content-card>
+
+
+        <content-card title="Playlista {{selected.name}}" *ngSwitchCase="'selected'">
+          <playlist-detail [playlist]="selected" (editplaylist)=" edit($event)"></playlist-detail>
+        </content-card>
+
+
+        <content-card title="Playlista {{selected.name}} - edycja" *ngSwitchCase="'edit'">
+          <playlist-form [playlist]="edited" (saved)="save($event)"></playlist-form>
+        </content-card>
+
+      </div>
+    </div>-->
+
+    <div class="col">
+        <app-content-card>
+            <router-outlet></router-outlet>
+        </app-content-card>
+    </div>
+
     <div class="col">
         <app-playlists-list
-            [playlists]="playlists"
             [selected]="selectedPlaylist"
-            (selectPlaylist)="select($event)"
+            [playlists]="playlists"
         >
         </app-playlists-list>
 
         <div class="form-group">
-            <button
-                class="btn btn-success float-xl-right"
-                (click)="createNew($event)"
-            >
-                Nowa Playlista
-            </button>
+            <button class="btn btn-success float-xs-right" [routerLink]="['new']">Nowa Playlista</button>
         </div>
     </div>
-    <!-- /col -->
 
-    <!-- col -->
-    <div class="col">
-        <div [ngSwitch]="mode">
-            <app-content-card
-                title="Playlista"
-                *ngSwitchDefault
-            >
-                <p>Wybierz <b>playlistę</b>!</p>
-            </app-content-card>
-
-            <app-content-card
-                title="Playlista {{ selectedPlaylist.name }}"
-                *ngSwitchCase="'selected'"
-            >
-                <app-playlist-detail
-                    [playlist]="selectedPlaylist"
-                    (editPlaylist)="edit($event)"
-                >
-                </app-playlist-detail>
-            </app-content-card>
-
-            <app-content-card
-                title="Playlista {{ selectedPlaylist.name }} - utwórz nowy"
-                *ngSwitchCase="'new'"
-            >
-                <app-playlist-form
-                    [playlist]="editedPlaylist"
-                    (saved)="save($event)"
-                >
-                </app-playlist-form>
-            </app-content-card>
-
-            <app-content-card
-                title="Playlista {{ selectedPlaylist.name }} - edycja"
-                *ngSwitchCase="'edit'"
-            >
-                <app-playlist-form
-                    [playlist]="editedPlaylist"
-                    (saved)="save($event)"
-                >
-                </app-playlist-form>
-            </app-content-card>
-        </div>
-    </div>
-    <!-- /col -->
 </div>

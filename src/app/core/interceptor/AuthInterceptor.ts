@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
-import { RequestOptions } from '@angular/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpEventType } from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService {
+export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private baseOptions: RequestOptions) {
-    }
-
-    private authorize() {
+    private authorize(): void {
         localStorage.removeItem('token');
 
         const client_id = '2787d1f8e189478a8f9411de5eacd25c';
@@ -19,7 +17,7 @@ export class AuthService {
         window.location.replace(url);
     }
 
-    getToken() {
+    private getToken(): String {
         let token = localStorage.getItem('token');
 
         if (!token) {
@@ -34,8 +32,20 @@ export class AuthService {
             this.authorize();
         }
 
-        this.baseOptions.headers.set('Authorization', 'Bearer ' + token);
-
         return token;
+    }
+
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<HttpEventType.Response>> {
+        const token = this.getToken();
+
+        if (!token) {
+            return next.handle(req);
+        }
+
+        const authReq = req.clone({
+            setHeaders: { Authorization: `Bearer ${token}` }
+        });
+
+        return next.handle(authReq);
     }
 }

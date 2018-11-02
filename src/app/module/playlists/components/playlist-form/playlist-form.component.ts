@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import IPlaylist from '../../../../shared/interface/playlist.interface';
 
 @Component({
     selector: 'app-playlist-form',
@@ -8,10 +9,10 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 export class PlaylistFormComponent implements OnInit {
 
     @Input()
-    playlist;
+    private playlist: IPlaylist;
 
     @Output('saved')
-    onSave = new EventEmitter();
+    private onSave = new EventEmitter();
 
     constructor() {
     }
@@ -19,7 +20,7 @@ export class PlaylistFormComponent implements OnInit {
     ngOnInit() {
     }
 
-    save(playlist) {
+    public save(playlist) {
         this.onSave.emit(playlist);
     }
 }

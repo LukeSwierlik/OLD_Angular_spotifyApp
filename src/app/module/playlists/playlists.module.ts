@@ -9,11 +9,13 @@ import {PlaylistFormComponent} from './components/playlist-form/playlist-form.co
 import {PlaylistDetailComponent} from './components/playlist-detail/playlist-detail.component';
 
 import PlaylistsMock from '../../core/mocks/playlistsMock';
+import {routerModule} from './playlists.routing';
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        routerModule
     ],
     declarations: [
         PlaylistsComponent,

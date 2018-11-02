@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import IAlbum from '../../../../shared/interface/album.interface';
 import {MusicSearchService} from '../../../../core/services/music-search/music-search.service';
+import {Observable} from 'rxjs';
+import IAlbum from '../../../../shared/interface/album.interface';
 
 @Component({
     selector: 'app-album-list',
@@ -8,14 +9,12 @@ import {MusicSearchService} from '../../../../core/services/music-search/music-s
     styleUrls: ['./album-list.component.css']
 })
 export class AlbumListComponent implements OnInit {
-    albums: Array<IAlbum>;
+    protected albums$: Observable<Array<IAlbum>>;
 
     constructor(private musicSearchService: MusicSearchService) {
     }
 
     ngOnInit() {
-        this.musicSearchService.getAlbums(albums => {
-            this.albums = albums;
-        });
+        this.albums$ = this.musicSearchService.getAlbumsStream();
     }
 }

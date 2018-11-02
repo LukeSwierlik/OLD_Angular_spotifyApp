@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import IPlaylist from '../../../../shared/interface/playlist.interface';
 
 @Component({
     selector: 'app-playlists-list',
@@ -8,10 +9,10 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 export class PlaylistsListComponent implements OnInit {
 
     @Input()
-    playlists;
+    public playlists: Array<IPlaylist>;
 
     @Input()
-    selected;
+    public selected: IPlaylist;
 
     @Output('selectPlaylist')
     onSelected = new EventEmitter();
