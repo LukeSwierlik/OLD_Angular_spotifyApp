@@ -1,5 +1,7 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import IPlaylist from '../../../../shared/interface/playlist.interface';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PlaylistsService} from '../../../../core/services/playlists/playlists.service';
 
 @Component({
     selector: 'app-playlist-detail',
@@ -7,19 +9,28 @@ import IPlaylist from '../../../../shared/interface/playlist.interface';
 })
 export class PlaylistDetailComponent implements OnInit {
 
-    @Input()
-    private playlist: IPlaylist;
+    protected playlist: IPlaylist;
 
-    @Output('editPlaylist')
-    private editEmitter = new EventEmitter();
-
-    constructor() {
+    constructor(private activeRoute: ActivatedRoute,
+                private playlistsService: PlaylistsService,
+                private router: Router) {
     }
 
     ngOnInit() {
+        this.activeRoute.params
+            .subscribe(params => {
+                const id = parseInt(params['id'], 10);
+
+                if (id) {
+                    this.playlistsService.getPlaylist(id)
+                        .subscribe( (playlist: IPlaylist) => {
+                            this.playlist = playlist;
+                        });
+                }
+            });
     }
 
     edit(playlist) {
-        this.editEmitter.emit(playlist);
+        this.router.navigate(['playlist', playlist.id, 'edit']);
     }
 }

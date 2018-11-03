@@ -7,21 +7,23 @@
             <th> Ulubiona </th>
         </tr>
     </thead>
+
     <tbody>
         <tr *ngFor="let playlist of playlists; let i = index"
-            (click)="select(playlist)"
             class="playlist-row"
-        >
-            <td> {{ i + 1 }} </td>
+            [ngClass]="{'table-active': selected == playlist}"
+            [ngStyle]="{ borderBottomColor: playlist.color }"
+            [routerLink]="[playlist.id]">
+
+            <td> {{ i + 1 }}. </td>
             <td> {{ playlist.name }} </td>
-            <td> {{ playlist.tracks }} </td>
+            <td> {{ playlist.tracks.length }} </td>
             <td>
                 <label>
-                    <input
-                        type="checkbox"
-                        [(ngModel)]="playlist.favourite"
-                        (click)="$event.stopPropagation();"
-                    > Ulubiona</label>
+                    <input type="checkbox"
+                              [(ngModel)]="playlist.favourite"
+                              (click)="$event.stopPropagation();">
+                    Ulubiona</label>
             </td>
         </tr>
     </tbody>

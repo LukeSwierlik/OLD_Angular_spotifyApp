@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import IPlaylist from '../../../../shared/interface/playlist.interface';
+import {PlaylistsService} from '../../../../core/services/playlists/playlists.service';
 
 @Component({
     selector: 'app-playlists-list',
@@ -8,23 +9,16 @@ import IPlaylist from '../../../../shared/interface/playlist.interface';
 })
 export class PlaylistsListComponent implements OnInit {
 
-    @Input()
-    public playlists: Array<IPlaylist>;
+    protected playlists = [];
 
-    @Input()
-    public selected: IPlaylist;
-
-    @Output('selectPlaylist')
-    onSelected = new EventEmitter();
-
-    constructor() {
+    constructor(private playlistService: PlaylistsService) {
     }
 
     ngOnInit() {
+        this.playlistService
+            .getPlaylistsStream()
+            .subscribe((playlists: IPlaylist[]) => {
+                this.playlists = playlists;
+            });
     }
-
-    select(playlist) {
-        this.onSelected.emit(playlist);
-    }
-
 }

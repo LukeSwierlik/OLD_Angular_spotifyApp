@@ -1,5 +1,7 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import IPlaylist from '../../../../shared/interface/playlist.interface';
+import {ActivatedRoute, Router} from '@angular/router';
+import {PlaylistsService} from '../../../../core/services/playlists/playlists.service';
 
 @Component({
     selector: 'app-playlist-form',
@@ -8,19 +10,46 @@ import IPlaylist from '../../../../shared/interface/playlist.interface';
 })
 export class PlaylistFormComponent implements OnInit {
 
-    @Input()
-    private playlist: IPlaylist;
+    protected categories: Array<string> = [
+        'Filmowa', 'Rockowa', 'Inne'
+    ];
 
-    @Output('saved')
-    private onSave = new EventEmitter();
+    protected playlist: IPlaylist;
 
-    constructor() {
+    constructor(private activeRoute: ActivatedRoute,
+                private playlistsService: PlaylistsService,
+                private router: Router) {
     }
 
     ngOnInit() {
+        this.activeRoute.params
+            .subscribe(params => {
+                const id = parseInt(params['id'], 10);
+
+                if (id) {
+                    this.playlistsService
+                        .getPlaylist(id)
+                        .subscribe((playlist: IPlaylist) => {
+                            this.playlist = Object.assign({}, playlist);
+                        });
+                } else {
+                    this.playlist = this.playlistsService.createPlaylist();
+                }
+            });
     }
 
-    public save(playlist) {
-        this.onSave.emit(playlist);
+    public save(valid, playlist) {
+       if (!valid) {
+           return;
+       }
+
+       this.playlistsService
+           .savePlaylist(playlist)
+           .subscribe((playlistElement: IPlaylist) => {
+               this.router.navigate([
+                   'playlist',
+                   playlistElement.id
+               ]);
+           });
     }
 }

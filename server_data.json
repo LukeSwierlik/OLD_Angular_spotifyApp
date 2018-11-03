@@ -1,0 +1,18 @@
+{
+    "playlists": [
+        {
+            "id": "1",
+            "name": "Angular Greatest Hits vol.3!",
+            "tracks": [],
+            "color": "#FF0000",
+            "favourite": 1
+        },
+        {
+            "id": 2,
+            "name": "The best of EduWeb!",
+            "tracks": [],
+            "color": "#0000FF",
+            "favourite": 0
+        }
+    ]
+}

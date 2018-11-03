@@ -1,45 +1,75 @@
-<div class="card">
-    <!-- card-body -->
-    <div class="card-body">
+<div *ngIf="playlist">
+    <form
+        #formRef="ngForm"
+        novalidate="true"
+        (ngSubmit)="save(formRef.valid, playlist)"
+    >
         <div class="form-group">
-            <label for="name">Nazwa:</label>
-            <input id="name"
-                   type="text"
+            <label>Nazwa:</label>
+            <input type="text"
+                   #nameRef="ngModel"
+                   required
+                   minlength="3"
                    [(ngModel)]="playlist.name"
+                   name="name"
                    class="form-control"
-            />
+            >
+            <div class="has-danger"
+                 *ngIf="nameRef.touched || nameRef.dirty || formRef.submitted">
+
+                <div class="form-control-feedback"
+                     *ngIf="nameRef.errors?.required">
+                    To pole jest wymagane
+                </div>
+
+                <div class="form-control-feedback"
+                     *ngIf="nameRef.errors?.minlength">
+                    To pole musi mieć przynajmniej {{nameRef.errors.minlength.requiredLength}} znaki
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Opis:</label>
+            <textarea
+                #descriptionRef="ngModel"
+                [(ngModel)]="playlist.description"
+                name="description"
+                maxlength="200" class="form-control">
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label> Kategoria: </label>
+            <select class="form-control" [(ngModel)]="playlist.category" name="category">
+                <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+            </select>
         </div>
 
-        <div class="form-group">
-            <label for="tracks">Tracks:</label>
-            <input id="tracks"
-                   type="text"
-                   [value]="playlist.tracks + ' utworów'"
-                   disabled
-                   class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label for="color">Color:</label>
-            <input id="color"
-                   type="color"
-                   [(ngModel)]="playlist.color" />
-        </div>
-
-        <div class="form-group">
-            <label for="favourite">
-                <input id="favourite"
-                       type="checkbox"
-                       [(ngModel)]="playlist.favourite" />Ulubiona
+        <!-- <div class="form-group">
+          <label> Kategoria: </label>
+          <div *ngFor="let category of categories">
+            <label class="form-ckeck-input">
+              <input type="radio" [(ngModel)]="playlist.category" name="category" [value]="category"> {{category}}
             </label>
+          </div>
+        </div> -->
+
+        <div class="form-group">
+            <label>Kolor:</label>
+            <input type="color"
+                   [(ngModel)]="playlist.color"
+                   name="color">
         </div>
 
         <div class="form-group">
-            <button
-                class="btn btn-success float-right"
-                (click)="save(playlist)">Zapisz
-            </button>
+            <label>
+                <input type="checkbox"
+                       [(ngModel)]="playlist.favourite"
+                       name="favourite">
+                Ulubiona</label>
         </div>
-    </div>
-    <!-- /card-body -->
+
+        <div class="form-group">
+            <button class="btn btn-success float-xs-right" type="submit">Zapisz</button>
+        </div>
+    </form>
 </div>

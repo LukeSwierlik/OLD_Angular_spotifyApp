@@ -1,7 +1,7 @@
 export default interface IPlaylist {
     id: number;
     name: string;
-    tracks: number;
+    tracks: any[];
     color: string;
     favourite: boolean;
 }

@@ -5,25 +5,6 @@
 </div>
 
 <div class="row mt-1">
-    <!--<div class="col">
-      <div [ngSwitch]="mode">
-        <content-card title="Playlista" *ngSwitchDefault>
-          <p>Wybierz <b>playlistę</b>!</p>
-        </content-card>
-
-
-        <content-card title="Playlista {{selected.name}}" *ngSwitchCase="'selected'">
-          <playlist-detail [playlist]="selected" (editplaylist)=" edit($event)"></playlist-detail>
-        </content-card>
-
-
-        <content-card title="Playlista {{selected.name}} - edycja" *ngSwitchCase="'edit'">
-          <playlist-form [playlist]="edited" (saved)="save($event)"></playlist-form>
-        </content-card>
-
-      </div>
-    </div>-->
-
     <div class="col">
         <app-content-card>
             <router-outlet></router-outlet>
@@ -31,14 +12,13 @@
     </div>
 
     <div class="col">
-        <app-playlists-list
-            [selected]="selectedPlaylist"
-            [playlists]="playlists"
-        >
-        </app-playlists-list>
+        <app-playlists-list></app-playlists-list>
 
         <div class="form-group">
-            <button class="btn btn-success float-xs-right" [routerLink]="['new']">Nowa Playlista</button>
+            <button
+                class="btn btn-success float-xs-right"
+                [routerLink]="['new']">
+                Nowa Playlista</button>
         </div>
     </div>
 
