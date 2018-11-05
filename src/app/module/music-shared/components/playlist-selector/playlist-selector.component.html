@@ -1,0 +1,17 @@
+<div class="input-group">
+    <label for="selectPlaylist" class="col-xs-4 col-form-label">Aktywna Playlista</label>
+
+    <select
+        id="selectPlaylist"
+        class="custom-select"
+        [ngModel]="selectedId"
+        (ngModelChange)="setSelected($event)"
+    >
+        <option
+            *ngFor="let playlist of playlists"
+            [value]="playlist.id"
+        >
+            {{ playlist.name }} ({{ playlist.tracks.length }})
+        </option>
+    </select>
+</div>

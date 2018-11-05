@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import {MusicSearchService} from '../../../../core/services/music-search/music-search.service';
 import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
@@ -8,7 +8,7 @@ import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
     templateUrl: './album-search-form.component.html',
     styleUrls: ['./album-search-form.component.css']
 })
-export class AlbumSearchFormComponent implements OnInit {
+export class AlbumSearchFormComponent {
 
     protected searchForm: FormGroup;
 
@@ -17,7 +17,9 @@ export class AlbumSearchFormComponent implements OnInit {
             'query': new FormControl('Batman')
         });
 
-        this.searchForm.get('query').valueChanges
+        this.searchForm
+            .get('query')
+            .valueChanges
             .pipe(
                 filter(query => query.length >= 3),
                 distinctUntilChanged(),
@@ -27,10 +29,7 @@ export class AlbumSearchFormComponent implements OnInit {
             });
     }
 
-    ngOnInit() {
-    }
-
-    protected search(query: String) {
+    protected search(query: String): void {
         this.musicSearch.search(query);
     }
 }

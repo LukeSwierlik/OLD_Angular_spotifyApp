@@ -9,6 +9,9 @@ import {MusicSearchModule} from './module/music-search/music-search.module';
 import {AuthInterceptor} from './core/interceptor/AuthInterceptor';
 import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import {routerModule} from './app.routing';
+import {PlaylistsService} from './core/services/playlists/playlists.service';
+import {MusicSharedModule} from './module/music-shared/music-shared.module';
+import {PlaylistSelectionService} from './core/services/playlist-selection/playlist-selection.service';
 
 @NgModule({
     declarations: [
@@ -21,9 +24,12 @@ import {routerModule} from './app.routing';
         HttpClientModule,
         PlaylistsModule,
         MusicSearchModule,
-        routerModule
+        routerModule,
+        MusicSharedModule
     ],
     providers: [
+        PlaylistsService,
+        PlaylistSelectionService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]

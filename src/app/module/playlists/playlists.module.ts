@@ -10,12 +10,14 @@ import {PlaylistDetailComponent} from './components/playlist-detail/playlist-det
 
 import PlaylistsMock from '../../core/mocks/playlistsMock';
 import {routerModule} from './playlists.routing';
+import {MusicSharedModule} from '../music-shared/music-shared.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        routerModule
+        routerModule,
+        MusicSharedModule
     ],
     declarations: [
         PlaylistsComponent,
@@ -26,12 +28,6 @@ import {routerModule} from './playlists.routing';
     ],
     exports: [
         PlaylistsComponent
-    ],
-    providers: [
-        {
-            provide: 'PlaylistsMock',
-            useValue: PlaylistsMock
-        }
     ]
 })
 export class PlaylistsModule {

@@ -3,6 +3,7 @@ import IPlaylist from '../../../shared/interface/playlist.interface';
 import {HttpClient} from '@angular/common/http';
 import {map, startWith} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import ITrack from '../../../shared/interface/track.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,13 @@ export class PlaylistsService {
     private playlistsStream$ = new Subject<IPlaylist[]>();
 
     constructor(private http: HttpClient) {
+    }
+
+    public addToPlaylist(playlistId: number, track: ITrack) {
+        const currentPlaylist = this.playlists.find((playlist: IPlaylist) => playlist.id === playlistId);
+        currentPlaylist.tracks.push(track);
+
+        this.savePlaylist(currentPlaylist);
     }
 
     public savePlaylist(playlist: IPlaylist) {
