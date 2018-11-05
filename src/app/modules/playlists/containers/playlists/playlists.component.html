@@ -1,0 +1,21 @@
+<app-section-title [title]="sectionTitle"></app-section-title>
+
+<div class="row mt-1">
+    <div class="col">
+        <app-content-card>
+            <router-outlet></router-outlet>
+        </app-content-card>
+    </div>
+
+    <div class="col">
+        <app-playlists-list></app-playlists-list>
+
+        <div class="form-group">
+            <button
+                class="btn btn-success float-xs-right"
+                [routerLink]="['new']">
+                Nowa Playlista</button>
+        </div>
+    </div>
+
+</div>

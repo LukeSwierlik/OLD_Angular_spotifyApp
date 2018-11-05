@@ -520,6 +520,15 @@
       ],
       "color": "#0000FF",
       "favourite": 0
+    },
+    {
+      "id": 3,
+      "name": "Nowa",
+      "tracks": [],
+      "color": "#FF0000",
+      "favourite": true,
+      "description": "dadasdasd",
+      "category": "Rockowa"
     }
   ]
 }

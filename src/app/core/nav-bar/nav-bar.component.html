@@ -5,18 +5,11 @@
         </h3>
 
         <ul class="nav navbar-nav float-xl-right">
-            <li class="nav-item">
+            <li class="nav-item" *ngFor="let route of routing;">
                 <a
                     class="nav-link"
-                    routerLink="/music"
-                    routerLinkActive="active">Search Music</a>
-            </li>
-
-            <li class="nav-item">
-                <a
-                    class="nav-link"
-                    routerLink="/playlist"
-                    routerLinkActive="active">Favourite Playlist</a>
+                    routerLink="{{ route.path }}"
+                    routerLinkActive="active">{{ route.name }}</a>
             </li>
         </ul>
     </div>

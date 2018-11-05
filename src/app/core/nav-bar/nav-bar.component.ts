@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import Navigation from '../../shared/enums/navigation.enum';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+    selector: 'app-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
 
-  constructor() { }
+    protected routing = [
+        {
+            path: '/music',
+            name: Navigation.SEARCH_MUSIC
+        },
+        {
+            path: '/playlist',
+            name: Navigation.PLAYLISTS
+        }
+    ];
 
-  ngOnInit() {
-  }
-
+    constructor() {
+    }
 }

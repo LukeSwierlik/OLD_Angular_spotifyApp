@@ -8,11 +8,12 @@ import {Observable, Subject} from 'rxjs';
     providedIn: 'root'
 })
 export class MusicSearchService {
-    private albums: Array<IAlbum> = [];
-    private albumsStream$ = new Subject();
+    private albums: Array<IAlbum>;
+    private readonly albumsStream$ = new Subject();
+    private readonly defaultSearchValue = 'Batman';
 
     constructor(private http: HttpClient) {
-        this.search('batman');
+        this.search(this.defaultSearchValue);
     }
 
     public search(query: String) {
@@ -22,7 +23,7 @@ export class MusicSearchService {
             .pipe(map((response: any) => {
                 return response.albums.items;
             }))
-            .subscribe(albums => {
+            .subscribe((albums: Array<IAlbum>) => {
                 this.albums = albums;
                 this.albumsStream$.next(this.albums);
             });
@@ -33,7 +34,7 @@ export class MusicSearchService {
             .pipe(startWith(this.albums));
     }
 
-    public getAlbum(id: String): Observable<Array<IAlbum>> {
+    public getAlbum(id: String): Observable<any> {
         const url = `https://api.spotify.com/v1/albums/${id}`;
 
         return this.http.get(url)

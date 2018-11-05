@@ -1,0 +1,13 @@
+<app-section-title [title]="sectionTitle"></app-section-title>
+
+<div class="row mt-1" *ngIf="album">
+    <div class="row">
+        <div class="col-xl-5">
+            <app-album-card class="card" [album]="album"></app-album-card>
+        </div>
+
+        <div class="col-xl-7">
+            <app-track-list [tracks]="album.tracks.items" ></app-track-list>
+        </div>
+    </div>
+</div>
