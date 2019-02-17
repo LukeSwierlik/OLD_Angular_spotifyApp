@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import IAlbum from '../../../shared/interface/album.interface';
-import {HttpClient} from '@angular/common/http';
-import {startWith, map} from 'rxjs/operators';
-import {Observable, Subject} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { startWith, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +16,7 @@ export class MusicSearchService {
         this.search(this.defaultSearchValue);
     }
 
-    public search(query: String) {
+    public search(query: string) {
         const url = `https://api.spotify.com/v1/search?type=album&market=PL&query=${query}`;
 
         this.http.get(url)
@@ -29,7 +29,7 @@ export class MusicSearchService {
             });
     }
 
-    public getAlbumsStream(): Observable<Array<IAlbum>> {
+    public getAlbumsStream(): Observable<any> {
         return this.albumsStream$
             .pipe(startWith(this.albums));
     }

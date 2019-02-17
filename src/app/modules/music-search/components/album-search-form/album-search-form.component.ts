@@ -12,7 +12,7 @@ export class AlbumSearchFormComponent {
 
     protected searchForm: FormGroup;
 
-    constructor(private musicSearch: MusicSearchService) {
+    constructor(private musicSearchService: MusicSearchService) {
         this.searchForm = new FormGroup({
             'query': new FormControl('Batman')
         });
@@ -25,11 +25,11 @@ export class AlbumSearchFormComponent {
                 distinctUntilChanged(),
                 debounceTime(400))
             .subscribe(query => {
-                this.musicSearch.search(query);
+                this.musicSearchService.search(query);
             });
     }
 
-    protected search(query: String): void {
-        this.musicSearch.search(query);
+    protected search(query: string): void {
+        // this.musicSearch.search(query);
     }
 }

@@ -10,6 +10,7 @@ import { AlbumDetailsComponent } from './components/album-details/album-details.
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {routerModule} from './music-search.routing';
 import {MusicSharedModule} from '../../shared/modules/music-shared/music-shared.module';
+import { MusicSearchFacade } from '../../ngRxUtility/music-search/music-search.facade';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import {MusicSharedModule} from '../../shared/modules/music-shared/music-shared.
         MusicSearchComponent
     ],
     providers: [
-        MusicSearchService
+        MusicSearchService,
+        MusicSearchFacade
     ]
 })
 export class MusicSearchModule {

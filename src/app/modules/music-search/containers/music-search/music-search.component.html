@@ -8,6 +8,6 @@
 
 <div class="row">
     <div class="col">
-        <app-album-list></app-album-list>
+        <app-album-list [musicSearchAlbums$]="musicSearchFacade.albums$ | async"></app-album-list>
     </div>
 </div>

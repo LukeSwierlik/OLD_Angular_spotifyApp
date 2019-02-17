@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpEventType } from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthInterceptor implements HttpInterceptor {
 
-    private authorize(): void {
+    private authorize() {
         localStorage.removeItem('token');
 
         const client_id = '2787d1f8e189478a8f9411de5eacd25c';
@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
         window.location.replace(url);
     }
 
-    private getToken(): String {
+    private getToken(): string {
         let token = localStorage.getItem('token');
 
         if (!token) {

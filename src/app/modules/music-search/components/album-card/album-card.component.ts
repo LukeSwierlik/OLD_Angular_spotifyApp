@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import IAlbum from '../../../../shared/interface/album.interface';
 import IImage from '../../../../shared/interface/image.interface';
 
@@ -7,7 +7,7 @@ import IImage from '../../../../shared/interface/image.interface';
     templateUrl: './album-card.component.html',
     styleUrls: ['./album-card.component.css']
 })
-export class AlbumCardComponent {
+export class AlbumCardComponent implements OnChanges {
     protected album: IAlbum;
     protected image: IImage;
 
@@ -19,4 +19,10 @@ export class AlbumCardComponent {
 
     constructor() {
     }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log('THIS ALBUM', this.album);
+    }
+
+
 }
