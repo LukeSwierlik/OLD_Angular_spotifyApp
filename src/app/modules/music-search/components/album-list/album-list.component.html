@@ -5,6 +5,6 @@
         [album]="album"
         class="card"
         [routerLink]="['album', album.id]"
-        *ngFor="let album of musicSearchAlbums$ | async">
+        *ngFor="let album of musicSearchAlbums$">
     </app-album-card>
 </div>

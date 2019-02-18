@@ -8,7 +8,7 @@ export const {
     selectEntities,
     selectAll,
     selectTotal,
-} = albumAdapter.getSelectors(selectAlbumState);
+} = albumAdapter.getSelectors();
 
 export const selectAlbumIds = createSelector(
     selectAlbumState,
@@ -22,6 +22,6 @@ export const selectAlbumEntities = createSelector(
 
 export const selectAllAlbum = createSelector(
     selectAlbumState,
-    selectAll
+    (state: any) => selectAll(state)
 );
 
