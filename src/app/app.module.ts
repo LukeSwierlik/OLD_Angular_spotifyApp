@@ -30,7 +30,11 @@ import {PlaylistSelectionService} from './core/services/playlist-selection/playl
     providers: [
         PlaylistsService,
         PlaylistSelectionService,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })
